@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cogni-config
+  namespace: {{ .Values.global.namespace | default .Release.Namespace }}
+  labels:
+    app: cogni-dispatch
+data:
+  MONGODB_URI: {{ .Values.config.mongodbUri | quote }}
+  AZURE_SPEECH_KEY: {{ .Values.config.azureSpeechKey | quote }}
+  AZURE_SPEECH_REGION: {{ .Values.config.azureSpeechRegion | quote }}
+  AZURE_OPENAI_ENDPOINT: {{ .Values.config.azureOpenaiEndpoint | quote }}
+  AZURE_OPENAI_KEY: {{ .Values.config.azureOpenaiKey | quote }}
+  AZURE_OPENAI_DEPLOYMENT: {{ .Values.config.azureOpenaiDeployment | quote }}
+  ALLOWED_CLIENT_IP: {{ .Values.config.allowedClientIp | quote }}
+  OPENAI_API_KEY: {{ .Values.config.openaiApiKey | quote }}
+  NODE_ENV: {{ .Values.config.nodeEnv | quote }}

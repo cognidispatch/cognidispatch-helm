@@ -1,0 +1,3 @@
+﻿# Auto-updated by CI pipeline (dev branch)
+imageTag: "dev-latest"
+replicas: 1

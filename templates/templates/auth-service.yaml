@@ -1,0 +1,120 @@
+{{- if .Values.authService.enabled -}}
+{{- if .Values.keyvault.enabled -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: auth-service-sa
+  namespace: {{ .Values.global.namespace | default .Release.Namespace }}
+  annotations:
+    azure.workload.identity/client-id: {{ .Values.keyvault.clientId | quote }}
+---
+{{- end }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: {{ .Values.global.namespace | default .Release.Namespace }}
+  labels:
+    app: auth-service
+    tier: backend
+    {{- if and .Values.keyvault.enabled .Values.keyvault.workloadIdentityEnabled }}
+    azure.workload.identity/use: "true"
+    {{- end }}
+spec:
+  replicas: {{ .Values.authService.replicas }}
+  selector:
+    matchLabels:
+      app: auth-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: auth-service
+        tier: backend
+        {{- if and .Values.keyvault.enabled .Values.keyvault.workloadIdentityEnabled }}
+        azure.workload.identity/use: "true"
+        {{- end }}
+    spec:
+      {{- if .Values.keyvault.enabled }}
+      serviceAccountName: auth-service-sa
+      {{- end }}
+      containers:
+        - name: auth-service
+          image: "{{ .Values.global.imageRegistry }}/{{ .Values.authService.image }}:{{ .Values.authService.imageTag | default .Values.global.imageTag }}"
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          workingDir: /app/auth-service
+          ports:
+            - containerPort: 5001
+              name: http
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "5001"
+            {{- if .Values.keyvault.enabled }}
+            - name: MONGODB_URI_FILE
+              value: "/mnt/secrets/MONGODB-URI"
+            - name: JWT_SECRET_FILE
+              value: "/mnt/secrets/JWT-SECRET"
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: cogni-config
+            - secretRef:
+                name: cogni-secrets
+                optional: true
+          resources:
+            {{- toYaml .Values.authService.resources | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /api/auth/health
+              port: 5001
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/auth/health
+              port: 5001
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          {{- if .Values.keyvault.enabled }}
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets"
+              readOnly: true
+          {{- end }}
+      {{- if .Values.keyvault.enabled }}
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "cogni-secrets-provider"
+      {{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+  namespace: {{ .Values.global.namespace | default .Release.Namespace }}
+  labels:
+    app: auth-service
+    tier: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: auth-service
+  ports:
+    - name: http
+      port: 5001
+      targetPort: 5001
+      protocol: TCP
+{{- end -}}

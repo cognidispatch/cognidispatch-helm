@@ -1,0 +1,74 @@
+{{- if .Values.frontend.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cogni-frontend
+  namespace: {{ .Values.global.namespace | default .Release.Namespace }}
+  labels:
+    app: cogni-frontend
+    tier: frontend
+spec:
+  replicas: {{ .Values.frontend.replicas }}
+  selector:
+    matchLabels:
+      app: cogni-frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: cogni-frontend
+        tier: frontend
+    spec:
+      containers:
+        - name: cogni-frontend
+          image: "{{ .Values.global.imageRegistry }}/{{ .Values.frontend.image }}:{{ .Values.frontend.imageTag | default .Values.global.imageTag }}"
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: {{ .Values.config.nodeEnv | quote }}
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cogni-frontend-svc
+  namespace: {{ .Values.global.namespace | default .Release.Namespace }}
+  labels:
+    app: cogni-frontend
+    tier: frontend
+spec:
+  type: NodePort
+  selector:
+    app: cogni-frontend
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+      nodePort: 30080
+      protocol: TCP
+{{- end -}}

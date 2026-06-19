@@ -1,0 +1,118 @@
+{{- if .Values.vendorService.enabled -}}
+{{- if .Values.keyvault.enabled -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vendor-service-sa
+  namespace: {{ .Values.global.namespace | default .Release.Namespace }}
+  annotations:
+    azure.workload.identity/client-id: {{ .Values.keyvault.clientId | quote }}
+---
+{{- end }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vendor-service
+  namespace: {{ .Values.global.namespace | default .Release.Namespace }}
+  labels:
+    app: vendor-service
+    tier: backend
+    {{- if and .Values.keyvault.enabled .Values.keyvault.workloadIdentityEnabled }}
+    azure.workload.identity/use: "true"
+    {{- end }}
+spec:
+  replicas: {{ .Values.vendorService.replicas }}
+  selector:
+    matchLabels:
+      app: vendor-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: vendor-service
+        tier: backend
+        {{- if and .Values.keyvault.enabled .Values.keyvault.workloadIdentityEnabled }}
+        azure.workload.identity/use: "true"
+        {{- end }}
+    spec:
+      {{- if .Values.keyvault.enabled }}
+      serviceAccountName: vendor-service-sa
+      {{- end }}
+      containers:
+        - name: vendor-service
+          image: "{{ .Values.global.imageRegistry }}/{{ .Values.vendorService.image }}:{{ .Values.vendorService.imageTag | default .Values.global.imageTag }}"
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          workingDir: /app/vendor-service
+          ports:
+            - containerPort: 5002
+              name: http
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "5002"
+            {{- if .Values.keyvault.enabled }}
+            - name: MONGODB_URI_FILE
+              value: "/mnt/secrets/MONGODB-URI"
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: cogni-config
+            - secretRef:
+                name: cogni-secrets
+                optional: true
+          resources:
+            {{- toYaml .Values.vendorService.resources | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /api/vendors/health
+              port: 5002
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/vendors/health
+              port: 5002
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          {{- if .Values.keyvault.enabled }}
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets"
+              readOnly: true
+          {{- end }}
+      {{- if .Values.keyvault.enabled }}
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "cogni-secrets-provider"
+      {{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vendor-service
+  namespace: {{ .Values.global.namespace | default .Release.Namespace }}
+  labels:
+    app: vendor-service
+    tier: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: vendor-service
+  ports:
+    - name: http
+      port: 5002
+      targetPort: 5002
+      protocol: TCP
+{{- end -}}

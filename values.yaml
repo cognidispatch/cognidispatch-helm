@@ -1,0 +1,152 @@
+# Global configurations
+global:
+  namespace: cogni-dispatch
+  imageRegistry: cogniregistry.azurecr.io
+  imagePullPolicy: Always
+  imageTag: latest
+
+# Microservices Configurations
+nginx:
+  enabled: true
+  replicas: 1
+  image: cogni-nginx
+  imageTag: latest
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "200m"
+
+authService:
+  enabled: true
+  replicas: 1
+  image: cogni-auth-service
+  imageTag: "v0.0.2"
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "250m"
+
+vendorService:
+  enabled: true
+  replicas: 1
+  image: cogni-vendor-service
+  imageTag: "v0.0.7"
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "250m"
+
+aiService:
+  enabled: true
+  replicas: 1
+  image: cogni-ai-service
+  imageTag: "v0.0.4"
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "250m"
+
+adminService:
+  enabled: true
+  replicas: 1
+  image: cogni-admin-service
+  imageTag: "v0.0.3"
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "250m"
+
+dispatchService:
+  enabled: true
+  replicas: 1
+  image: cogni-dispatch-service
+  imageTag: "v0.0.1"
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+paymentService:
+  enabled: true
+  replicas: 1
+  image: cogni-payment-service
+  imageTag: "v0.0.5"
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "250m"
+
+frontend:
+  enabled: true
+  replicas: 1
+  image: cogni-frontend
+  imageTag: "v0.0.6"
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+# Application Settings
+config:
+  nodeEnv: production
+  mongodbUri: "mongodb://cosmos-cognidispatch-db:<password>@cosmos-cognidispatch-db.mongo.cosmos.azure.com:10255/cognidispatch?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cosmos-cognidispatch-db@"
+  azureSpeechKey: "REPLACE_WITH_YOUR_KEY"
+  azureSpeechRegion: "eastus"
+  azureOpenaiEndpoint: "https://cogni-openai-93849.openai.azure.com/"
+  azureOpenaiKey: "mock_openai_key"
+  azureOpenaiDeployment: "gpt-4o"
+  allowedClientIp: "http://20.207.99.48"
+  openaiApiKey: "mock_openai_api_key"
+
+# Managed Key Vault Secrets Mount Configuration (Set true in Production)
+keyvault:
+  enabled: true
+  name: "cognidispatch-kv"
+  tenantId: "0c0c1198-4f0b-4f85-8409-de831b00f9f7"
+  clientId: "8211bf1c-f324-4369-a2e3-fc7bd94e8ffd"
+  workloadIdentityEnabled: true
+
+# Ingress Controller Configuration
+ingress:
+  enabled: true
+  className: "azure-application-gateway"
+  annotations:
+    kubernetes.io/ingress.class: "azure/application-gateway"
+  hosts:
+    - paths:
+        - path: /api/
+          pathType: Prefix
+          backendName: cogni-backend-svc
+          backendPort: 5000
+        - path: /socket.io/
+          pathType: Prefix
+          backendName: cogni-backend-svc
+          backendPort: 5000
+        - path: /
+          pathType: Prefix
+          backendName: cogni-frontend-svc
+          backendPort: 3000
