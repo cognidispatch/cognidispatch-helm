@@ -46,7 +46,7 @@ spec:
         - name: dispatch-service
           image: "{{ .Values.global.imageRegistry }}/{{ .Values.dispatchService.image }}:{{ .Values.dispatchService.imageTag | default .Values.global.imageTag }}"
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-          workingDir: /app/dispatch-service
+          workingDir: /app
           ports:
             - containerPort: 5005
               name: http
@@ -57,6 +57,8 @@ spec:
             {{- if .Values.keyvault.enabled }}
             - name: MONGODB_URI_FILE
               value: "/mnt/secrets/MONGODB-URI"
+            - name: SERVICEBUS_TOPIC
+              value: "dispatch-created"
             {{- end }}
           envFrom:
             - configMapRef:
