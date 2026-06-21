@@ -14,7 +14,7 @@ spec:
         value: /api/
     - path:
         type: PathPrefix
-        value: /socket.io/
+        value: /socket.io
     backendRefs:
     - name: cogni-backend-svc
       port: 5000
