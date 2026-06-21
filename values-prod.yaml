@@ -10,6 +10,7 @@ nginx:
   replicas: 2
   image: cogni-nginx
   imageTag: v2
+  nodePort: 30500
   resources:
     requests:
       memory: "128Mi"
@@ -101,6 +102,7 @@ frontend:
   replicas: 2
   image: cogni-frontend
   imageTag: "v1"
+  nodePort: 30080
   resources:
     requests:
       memory: "256Mi"

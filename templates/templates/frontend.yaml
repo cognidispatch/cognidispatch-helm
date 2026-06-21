@@ -62,13 +62,15 @@ metadata:
     app: cogni-frontend
     tier: frontend
 spec:
-  type: NodePort
+  type: {{ .Values.frontend.serviceType | default "NodePort" }}
   selector:
     app: cogni-frontend
   ports:
     - name: http
       port: 3000
       targetPort: 3000
-      nodePort: 30080
+      {{- if and (eq (.Values.frontend.serviceType | default "NodePort") "NodePort") .Values.frontend.nodePort }}
+      nodePort: {{ .Values.frontend.nodePort }}
+      {{- end }}
       protocol: TCP
 {{- end -}}

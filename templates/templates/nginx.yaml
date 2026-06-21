@@ -181,13 +181,15 @@ metadata:
     app: cogni-backend
     tier: backend
 spec:
-  type: NodePort
+  type: {{ .Values.nginx.serviceType | default "NodePort" }}
   selector:
     app: cogni-backend
   ports:
     - name: http
       port: 5000
       targetPort: 5000
-      nodePort: 30500
+      {{- if and (eq (.Values.nginx.serviceType | default "NodePort") "NodePort") .Values.nginx.nodePort }}
+      nodePort: {{ .Values.nginx.nodePort }}
+      {{- end }}
       protocol: TCP
 {{- end -}}
