@@ -5,7 +5,7 @@ metadata:
   namespace: kgateway-system
 spec:
   kube:
-    service:
-      type: LoadBalancer
-      annotations:
-        service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    serviceOverlay:
+      metadata:
+        annotations:
+          service.beta.kubernetes.io/azure-load-balancer-internal: "true"
