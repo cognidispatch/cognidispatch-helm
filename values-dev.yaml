@@ -1,6 +1,6 @@
 # Global configurations
 global:
-  namespace: cogni-dispatch
+  namespace: cogni-dev
   imageRegistry: cogniregistry.azurecr.io
   imagePullPolicy: Always
   imageTag: latest
@@ -24,7 +24,7 @@ authService:
   enabled: true
   replicas: 1
   image: cogni-auth-service
-  imageTag: "dev-latest"
+  imageTag: "ba17d13"
   resources:
     requests:
       memory: "128Mi"
@@ -37,7 +37,7 @@ vendorService:
   enabled: true
   replicas: 1
   image: cogni-vendor-service
-  imageTag: "dev-latest"
+  imageTag: "ca59cd9"
   resources:
     requests:
       memory: "128Mi"
@@ -50,7 +50,7 @@ aiService:
   enabled: true
   replicas: 1
   image: cogni-ai-service
-  imageTag: "dev-latest"
+  imageTag: "568d67e"
   resources:
     requests:
       memory: "128Mi"
@@ -63,7 +63,7 @@ adminService:
   enabled: true
   replicas: 1
   image: cogni-admin-service
-  imageTag: "dev-latest"
+  imageTag: "fe4749e"
   resources:
     requests:
       memory: "128Mi"
@@ -76,7 +76,7 @@ dispatchService:
   enabled: true
   replicas: 1
   image: cogni-dispatch-service
-  imageTag: "dev-latest"
+  imageTag: "94dfa9d"
   resources:
     requests:
       memory: "256Mi"
@@ -89,7 +89,7 @@ paymentService:
   enabled: true
   replicas: 1
   image: cogni-payment-service
-  imageTag: "dev-latest"
+  imageTag: "40769db"
   resources:
     requests:
       memory: "128Mi"
@@ -102,7 +102,7 @@ frontend:
   enabled: true
   replicas: 1
   image: cogni-frontend
-  imageTag: "dev-latest"
+  imageTag: "9a92cd2"
   resources:
     requests:
       memory: "256Mi"
