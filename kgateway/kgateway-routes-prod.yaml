@@ -5,7 +5,7 @@ metadata:
   namespace: cogni-prod
 spec:
   parentRefs:
-  - name: kgateway
+  - name: cogni-gateway
     namespace: kgateway-system
   rules:
   - matches:
