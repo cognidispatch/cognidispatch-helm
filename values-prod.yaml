@@ -125,7 +125,7 @@ keyvault:
   enabled: true
   name: "cognidispatch-kv"
   tenantId: "0c0c1198-4f0b-4f85-8409-de831b00f9f7"
-  clientId: "8211bf1c-f324-4369-a2e3-fc7bd94e8ffd"
+  clientId: "8cb4ee26-43f5-40b7-8b62-f84420982263"
   workloadIdentityEnabled: true
 
 ingress:
