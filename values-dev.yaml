@@ -38,7 +38,7 @@ vendorService:
   enabled: true
   replicas: 1
   image: cogni-vendor-service
-  imageTag: "ca59cd9"
+  imageTag: "sb-v1"
   resources:
     requests:
       memory: "64Mi"
@@ -77,7 +77,7 @@ dispatchService:
   enabled: true
   replicas: 1
   image: cogni-dispatch-service
-  imageTag: "94dfa9d"
+  imageTag: "sb-v1"
   resources:
     requests:
       memory: "64Mi"
