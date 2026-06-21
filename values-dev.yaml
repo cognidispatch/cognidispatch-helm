@@ -15,11 +15,11 @@ nginx:
   nodePort: 30501
   resources:
     requests:
+      memory: "32Mi"
+      cpu: "10m"
+    limits:
       memory: "128Mi"
       cpu: "100m"
-    limits:
-      memory: "256Mi"
-      cpu: "200m"
 
 authService:
   enabled: true
@@ -28,11 +28,11 @@ authService:
   imageTag: "ba17d13"
   resources:
     requests:
+      memory: "64Mi"
+      cpu: "10m"
+    limits:
       memory: "128Mi"
       cpu: "100m"
-    limits:
-      memory: "256Mi"
-      cpu: "250m"
 
 vendorService:
   enabled: true
@@ -41,11 +41,11 @@ vendorService:
   imageTag: "ca59cd9"
   resources:
     requests:
+      memory: "64Mi"
+      cpu: "10m"
+    limits:
       memory: "128Mi"
       cpu: "100m"
-    limits:
-      memory: "256Mi"
-      cpu: "250m"
 
 aiService:
   enabled: true
@@ -54,11 +54,11 @@ aiService:
   imageTag: "568d67e"
   resources:
     requests:
+      memory: "64Mi"
+      cpu: "10m"
+    limits:
       memory: "128Mi"
       cpu: "100m"
-    limits:
-      memory: "256Mi"
-      cpu: "250m"
 
 adminService:
   enabled: true
@@ -67,11 +67,11 @@ adminService:
   imageTag: "fe4749e"
   resources:
     requests:
+      memory: "64Mi"
+      cpu: "10m"
+    limits:
       memory: "128Mi"
       cpu: "100m"
-    limits:
-      memory: "256Mi"
-      cpu: "250m"
 
 dispatchService:
   enabled: true
@@ -80,11 +80,11 @@ dispatchService:
   imageTag: "94dfa9d"
   resources:
     requests:
+      memory: "64Mi"
+      cpu: "15m"
+    limits:
       memory: "256Mi"
       cpu: "250m"
-    limits:
-      memory: "512Mi"
-      cpu: "500m"
 
 paymentService:
   enabled: true
@@ -93,11 +93,11 @@ paymentService:
   imageTag: "40769db"
   resources:
     requests:
+      memory: "64Mi"
+      cpu: "10m"
+    limits:
       memory: "128Mi"
       cpu: "100m"
-    limits:
-      memory: "256Mi"
-      cpu: "250m"
 
 frontend:
   enabled: true
@@ -107,11 +107,11 @@ frontend:
   nodePort: 30081
   resources:
     requests:
+      memory: "64Mi"
+      cpu: "15m"
+    limits:
       memory: "256Mi"
       cpu: "250m"
-    limits:
-      memory: "512Mi"
-      cpu: "500m"
 
 # Dev Application Settings
 config:
