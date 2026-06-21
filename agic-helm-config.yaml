@@ -2,7 +2,7 @@ verbosityLevel: 3
 
 # Managed Identity Authentication Config
 armAuth:
-  type: aadMSI
+  type: workloadIdentity
   identityClientID: "74d38441-4134-4589-8ecc-59d5cf649663"
   identityResourceID: "/subscriptions/e3b28d61-42ec-43a8-85ac-9defcc8dbf81/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ingressappgw-cogni-aks"
 
