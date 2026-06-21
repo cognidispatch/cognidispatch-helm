@@ -8,5 +8,7 @@ spec:
     serviceOverlay:
       metadata:
         annotations:
+          # Deploy KGateway as an Azure Internal Load Balancer.
+          # This keeps KGateway private - only accessible from within the VNet.
+          # The App Gateway (in the same Spoke VNet) routes traffic to it.
           service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-          service.beta.kubernetes.io/azure-disable-load-balancer-floating-ip: "true"
