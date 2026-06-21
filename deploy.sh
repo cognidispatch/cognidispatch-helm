@@ -39,7 +39,8 @@ log "Getting AKS credentials..."
 az aks get-credentials \
   --resource-group "$RESOURCE_GROUP" \
   --name "$CLUSTER_NAME" \
-  --overwrite-existing
+  --overwrite-existing \
+  --admin
 
 # --- Step 2: Install Gateway API CRDs ----------------------------------------
 log "Installing Kubernetes Gateway API CRDs (${GATEWAY_API_VERSION})..."
