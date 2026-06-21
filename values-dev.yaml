@@ -116,7 +116,7 @@ frontend:
 # Dev Application Settings
 config:
   nodeEnv: development
-  mongodbUri: "mongodb://cosmos-cognidispatch-db:99Z3JmsPHBAHZ96rFMPf1Ss5VQ52sOoZTMYcoZntnIg7b3gOgLco0fx7FsQhu3K39UsC6YdpkikHACDb5BVesg%3D%3D@cosmos-cognidispatch-db.mongo.cosmos.azure.com:10255/cognidispatch?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cosmos-cognidispatch-db@"
+  mongodbUri: "mongodb://cosmos-db-placeholder-do-not-use"
   azureSpeechKey: "REPLACE_WITH_YOUR_KEY"
   azureSpeechRegion: "eastus"
   azureOpenaiEndpoint: "https://cogni-openai-93849.openai.azure.com/"

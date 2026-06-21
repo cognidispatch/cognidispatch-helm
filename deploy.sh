@@ -106,10 +106,23 @@ log "Waiting 30 seconds for App Gateway to re-probe backend health..."
 sleep 30
 
 # --- Step 7: Deploy application (Dev) ----------------------------------------
+log "Querying Azure Key Vault and Managed Identity details..."
+KEYVAULT_NAME=$(az keyvault list --resource-group "$RESOURCE_GROUP" --query "[0].name" -o tsv || echo "cognidispatch-kv")
+POD_IDENTITY_CLIENT_ID=$(az identity show --resource-group "$RESOURCE_GROUP" --name "cogni-pod-identity" --query clientId -o tsv || echo "")
+TENANT_ID=$(az account show --query tenantId -o tsv || echo "")
+
+log "Using Key Vault: ${KEYVAULT_NAME}"
+log "Using Managed Identity Client ID: ${POD_IDENTITY_CLIENT_ID}"
+
 log "Deploying CogniDispatch application (cogni-dev namespace)..."
 helm upgrade -i cognidispatch-dev "${SCRIPT_DIR}" \
   -n cogni-dev \
   -f "${SCRIPT_DIR}/values-dev.yaml" \
+  --set keyvault.enabled=true \
+  --set keyvault.name="${KEYVAULT_NAME}" \
+  --set keyvault.clientId="${POD_IDENTITY_CLIENT_ID}" \
+  --set keyvault.tenantId="${TENANT_ID}" \
+  --set keyvault.workloadIdentityEnabled=true \
   --create-namespace \
   --wait \
   --timeout 5m
