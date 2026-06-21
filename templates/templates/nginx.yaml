@@ -92,7 +92,7 @@ data:
                 proxy_read_timeout 60s;
             }
 
-            location /socket.io/ {
+            location /socket.io {
                 proxy_pass http://dispatch_backend;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
