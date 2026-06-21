@@ -188,6 +188,7 @@ spec:
     - name: http
       port: 5000
       targetPort: 5000
+      appProtocol: kubernetes.io/ws
       {{- if and (eq (.Values.nginx.serviceType | default "NodePort") "NodePort") .Values.nginx.nodePort }}
       nodePort: {{ .Values.nginx.nodePort }}
       {{- end }}
