@@ -90,7 +90,7 @@ paymentService:
   enabled: true
   replicas: 1
   image: cogni-payment-service
-  imageTag: "dev-5ce3440"
+  imageTag: "dev-445ead1"
   resources:
     requests:
       memory: "64Mi"
@@ -103,7 +103,7 @@ frontend:
   enabled: true
   replicas: 1
   image: cogni-frontend
-  imageTag: "dev-5ce3440"
+  imageTag: "dev-445ead1"
   nodePort: 30081
   resources:
     requests:
