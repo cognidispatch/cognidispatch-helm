@@ -38,7 +38,7 @@ vendorService:
   enabled: true
   replicas: 1
   image: cogni-vendor-service
-  imageTag: "dev-4d6986a"
+  imageTag: "dev-afa082b"
   resources:
     requests:
       memory: "64Mi"
