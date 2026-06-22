@@ -46,7 +46,6 @@ spec:
         - name: payment-service
           image: "{{ .Values.global.imageRegistry }}/{{ .Values.paymentService.image }}:{{ .Values.paymentService.imageTag | default .Values.global.imageTag }}"
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-          workingDir: /app/payment-service
           ports:
             - containerPort: 5006
               name: http

@@ -46,7 +46,6 @@ spec:
         - name: dispatch-service
           image: "{{ .Values.global.imageRegistry }}/{{ .Values.dispatchService.image }}:{{ .Values.dispatchService.imageTag | default .Values.global.imageTag }}"
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-          workingDir: /app
           ports:
             - containerPort: 5005
               name: http

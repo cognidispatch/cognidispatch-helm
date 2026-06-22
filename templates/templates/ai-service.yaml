@@ -46,7 +46,6 @@ spec:
         - name: ai-service
           image: "{{ .Values.global.imageRegistry }}/{{ .Values.aiService.image }}:{{ .Values.aiService.imageTag | default .Values.global.imageTag }}"
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-          workingDir: /app/ai-service
           ports:
             - containerPort: 5003
               name: http

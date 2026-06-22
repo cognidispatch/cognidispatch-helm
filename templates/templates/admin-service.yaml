@@ -46,7 +46,6 @@ spec:
         - name: admin-service
           image: "{{ .Values.global.imageRegistry }}/{{ .Values.adminService.image }}:{{ .Values.adminService.imageTag | default .Values.global.imageTag }}"
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-          workingDir: /app/admin-service
           ports:
             - containerPort: 5004
               name: http

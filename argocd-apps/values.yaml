@@ -4,7 +4,7 @@ destinationServer: "https://kubernetes.default.svc"
 
 dev:
   enabled: true
-  targetRevision: "dev"
+  targetRevision: "production"
   namespace: "cogni-dev"
 
 prod:

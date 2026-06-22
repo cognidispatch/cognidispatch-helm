@@ -46,7 +46,6 @@ spec:
         - name: vendor-service
           image: "{{ .Values.global.imageRegistry }}/{{ .Values.vendorService.image }}:{{ .Values.vendorService.imageTag | default .Values.global.imageTag }}"
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-          workingDir: /app
           ports:
             - containerPort: 5002
               name: http
