@@ -51,7 +51,7 @@ aiService:
   enabled: true
   replicas: 1
   image: cogni-ai-service
-  imageTag: "dev-c467929"
+  imageTag: "dev-2c7e13a"
   resources:
     requests:
       memory: "64Mi"
