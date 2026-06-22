@@ -64,7 +64,7 @@ adminService:
   enabled: true
   replicas: 1
   image: cogni-admin-service
-  imageTag: "dev-4d6986a"
+  imageTag: "dev-48b1df0"
   resources:
     requests:
       memory: "64Mi"
@@ -77,7 +77,7 @@ dispatchService:
   enabled: true
   replicas: 1
   image: cogni-dispatch-service
-  imageTag: "dev-4d6986a"
+  imageTag: "dev-48b1df0"
   resources:
     requests:
       memory: "64Mi"
@@ -90,7 +90,7 @@ paymentService:
   enabled: true
   replicas: 1
   image: cogni-payment-service
-  imageTag: "dev-4d6986a"
+  imageTag: "dev-48b1df0"
   resources:
     requests:
       memory: "64Mi"
@@ -103,7 +103,7 @@ frontend:
   enabled: true
   replicas: 1
   image: cogni-frontend
-  imageTag: "dev-4d6986a"
+  imageTag: "dev-48b1df0"
   nodePort: 30081
   resources:
     requests:
