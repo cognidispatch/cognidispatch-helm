@@ -38,7 +38,7 @@ vendorService:
   enabled: true
   replicas: 1
   image: cogni-vendor-service
-  imageTag: "dev-859ca18"
+  imageTag: "dev-4d6986a"
   resources:
     requests:
       memory: "64Mi"
@@ -64,7 +64,7 @@ adminService:
   enabled: true
   replicas: 1
   image: cogni-admin-service
-  imageTag: "dev-3adbe78"
+  imageTag: "dev-48b1df0"
   resources:
     requests:
       memory: "64Mi"
@@ -103,7 +103,7 @@ frontend:
   enabled: true
   replicas: 1
   image: cogni-frontend
-  imageTag: "dev-445ead1"
+  imageTag: "dev-0f64266"
   nodePort: 30081
   resources:
     requests:
