@@ -15,3 +15,4 @@ data:
   ALLOWED_CLIENT_IP: {{ .Values.config.allowedClientIp | quote }}
   OPENAI_API_KEY: {{ .Values.config.openaiApiKey | quote }}
   NODE_ENV: {{ .Values.config.nodeEnv | quote }}
+  MOCK_AI: {{ .Values.config.mockAi | default "false" | quote }}

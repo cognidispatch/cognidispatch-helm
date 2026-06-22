@@ -124,6 +124,7 @@ config:
   azureOpenaiDeployment: "gpt-4o"
   allowedClientIp: "http://20.207.99.48"
   openaiApiKey: "mock_openai_api_key"
+  mockAi: "true"
 
 keyvault:
   enabled: false
