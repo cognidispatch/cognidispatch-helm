@@ -1,6 +1,8 @@
-﻿*.lock
+*.lock
 .DS_Store
 secrets/
 sealed-secrets/
 *.key
 *.pem
+
+ARGOCD_README.md
