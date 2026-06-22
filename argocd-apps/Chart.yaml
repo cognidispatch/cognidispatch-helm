@@ -1,0 +1,6 @@
+apiVersion: v2
+name: argocd-app-of-apps
+description: Root Helm chart managing CogniDispatch environments via ArgoCD
+type: application
+version: 1.0.0
+appVersion: "1.0.0"

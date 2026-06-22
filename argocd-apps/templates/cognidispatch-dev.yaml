@@ -1,0 +1,27 @@
+{{- if .Values.dev.enabled -}}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cognidispatch-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: {{ .Values.repoURL | quote }}
+    targetRevision: {{ .Values.dev.targetRevision | quote }}
+    path: "."
+    helm:
+      valueFiles:
+        - values-dev.yaml
+  destination:
+    server: {{ .Values.destinationServer | quote }}
+    namespace: {{ .Values.dev.namespace | quote }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end -}}

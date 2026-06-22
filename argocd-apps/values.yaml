@@ -1,0 +1,13 @@
+# GitOps repository configurations
+repoURL: "https://github.com/cognidispatch/cognidispatch-helm.git"
+destinationServer: "https://kubernetes.default.svc"
+
+dev:
+  enabled: true
+  targetRevision: "dev"
+  namespace: "cogni-dev"
+
+prod:
+  enabled: true
+  targetRevision: "production"
+  namespace: "cogni-prod"
