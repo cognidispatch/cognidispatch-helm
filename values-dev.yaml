@@ -117,21 +117,21 @@ frontend:
 config:
   nodeEnv: development
   mongodbUri: "mongodb://cosmos-db-placeholder-do-not-use"
-  azureSpeechKey: "REPLACE_WITH_YOUR_KEY"
+  azureSpeechKey: "keyvault-managed"
   azureSpeechRegion: "eastus"
   azureOpenaiEndpoint: "https://cogni-openai-93849.openai.azure.com/"
-  azureOpenaiKey: "mock_openai_key"
+  azureOpenaiKey: "keyvault-managed"
   azureOpenaiDeployment: "gpt-4o"
   allowedClientIp: "http://20.207.99.48"
-  openaiApiKey: "mock_openai_api_key"
-  mockAi: "true"
+  openaiApiKey: "keyvault-managed"
+  mockAi: "false"
 
 keyvault:
-  enabled: false
+  enabled: true
   name: "cognidispatch-kv"
   tenantId: "0c0c1198-4f0b-4f85-8409-de831b00f9f7"
   clientId: "8cb4ee26-43f5-40b7-8b62-f84420982263"
-  workloadIdentityEnabled: false
+  workloadIdentityEnabled: true
 
 ingress:
   enabled: false

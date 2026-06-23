@@ -114,13 +114,13 @@ frontend:
 config:
   nodeEnv: production
   mongodbUri: "mongodb://cosmos-cognidispatch-db:<password>@cosmos-cognidispatch-db.mongo.cosmos.azure.com:10255/cognidispatch?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cosmos-cognidispatch-db@"
-  azureSpeechKey: "REPLACE_WITH_YOUR_KEY"
+  azureSpeechKey: "keyvault-managed"
   azureSpeechRegion: "eastus"
   azureOpenaiEndpoint: "https://cogni-openai-93849.openai.azure.com/"
-  azureOpenaiKey: "mock_openai_key"
+  azureOpenaiKey: "keyvault-managed"
   azureOpenaiDeployment: "gpt-4o"
   allowedClientIp: "http://20.207.99.48"
-  openaiApiKey: "mock_openai_api_key"
+  openaiApiKey: "keyvault-managed"
   mockAi: "false"
 
 # Managed Key Vault Secrets Mount Configuration (Set true in Production)
