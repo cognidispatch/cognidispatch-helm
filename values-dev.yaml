@@ -103,7 +103,7 @@ frontend:
   enabled: true
   replicas: 1
   image: cogni-frontend
-  imageTag: "dev-0f64266"
+  imageTag: "dev-60a1745"
   nodePort: 30081
   resources:
     requests:
