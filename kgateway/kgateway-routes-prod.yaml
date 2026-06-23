@@ -18,6 +18,8 @@ spec:
     backendRefs:
     - name: cogni-backend-svc
       port: 5000
+    timeouts:
+      request: 90s
   - matches:
     - path:
         type: PathPrefix
