@@ -1,4 +1,3 @@
-# GitOps repository configurations
 repoURL: "https://github.com/cognidispatch/cognidispatch-helm.git"
 destinationServer: "https://kubernetes.default.svc"
 

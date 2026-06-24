@@ -1,3 +1,2 @@
-﻿# Auto-updated by CI pipeline (production branch)
 imageTag: "v0.0.5"
 replicas: 2

@@ -12,8 +12,6 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
-  # No hardcoded IP - Azure assigns a dynamic internal ILB IP from snet-aks.
-  # The deploy.sh script reads this IP and updates the App Gateway backend pool.
   infrastructure:
     parametersRef:
       group: gateway.kgateway.dev

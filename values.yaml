@@ -1,11 +1,9 @@
-# Global configurations
 global:
   namespace: cogni-dispatch
   imageRegistry: cogniregistry.azurecr.io
   imagePullPolicy: Always
   imageTag: latest
 
-# Microservices Configurations
 nginx:
   enabled: true
   replicas: 1
@@ -110,7 +108,6 @@ frontend:
       memory: "512Mi"
       cpu: "500m"
 
-# Application Settings
 config:
   nodeEnv: production
   mongodbUri: "mongodb://cosmos-cognidispatch-db:<password>@cosmos-cognidispatch-db.mongo.cosmos.azure.com:10255/cognidispatch?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cosmos-cognidispatch-db@"
@@ -123,7 +120,6 @@ config:
   openaiApiKey: "keyvault-managed"
   mockAi: "false"
 
-# Managed Key Vault Secrets Mount Configuration (Set true in Production)
 keyvault:
   enabled: true
   name: "cognidispatch-kv"
@@ -131,7 +127,6 @@ keyvault:
   clientId: "8cb4ee26-43f5-40b7-8b62-f84420982263"
   workloadIdentityEnabled: true
 
-# Ingress Controller Configuration
 ingress:
   enabled: true
   className: "azure-application-gateway"

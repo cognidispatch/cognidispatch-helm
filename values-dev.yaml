@@ -1,12 +1,9 @@
-# Global configurations
 global:
   namespace: cogni-dev
   imageRegistry: cogniregistry.azurecr.io
   imagePullPolicy: Always
   imageTag: latest
 
-# Dev environment overrides
-# Each service's imageTag is managed individually in microservices/<svc>/values-dev.yaml
 nginx:
   enabled: true
   replicas: 1
@@ -113,7 +110,6 @@ frontend:
       memory: "256Mi"
       cpu: "250m"
 
-# Dev Application Settings
 config:
   nodeEnv: development
   mongodbUri: "mongodb://cosmos-db-placeholder-do-not-use"
