@@ -65,6 +65,7 @@ helm upgrade -i kgateway \
 
 # --- Step 4: Apply KGateway manifests -----------------------------------------
 log "Applying KGateway manifests..."
+kubectl create namespace cogni-dev --dry-run=client -o yaml | kubectl apply -f -
 kubectl apply -f "${SCRIPT_DIR}/kgateway/kgateway-params.yaml"
 kubectl apply -f "${SCRIPT_DIR}/kgateway/kgateway-gateway.yaml"
 kubectl apply -f "${SCRIPT_DIR}/kgateway/kgateway-routes-dev.yaml"
