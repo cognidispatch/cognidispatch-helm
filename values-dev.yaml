@@ -115,12 +115,12 @@ config:
   mongodbUri: "mongodb://cosmos-db-placeholder-do-not-use"
   azureSpeechKey: "keyvault-managed"
   azureSpeechRegion: "eastus"
-  azureOpenaiEndpoint: "https://cogni-openai-93849.openai.azure.com/"
+  azureOpenaiEndpoint: "https://cogni-openai-eastus2-7c785.openai.azure.com/"
   azureOpenaiKey: "keyvault-managed"
-  azureOpenaiDeployment: "gpt-4o"
+  azureOpenaiDeployment: "gpt-4.1-mini"
   allowedClientIp: "http://20.207.99.48"
   openaiApiKey: "keyvault-managed"
-  mockAi: "true"
+  mockAi: "false"
 
 keyvault:
   enabled: true
