@@ -6,106 +6,106 @@ global:
 
 nginx:
   enabled: true
-  replicas: 1
+  replicas: 2
   image: cogni-nginx
   imageTag: latest
   nodePort: 30501
   resources:
     requests:
       memory: "32Mi"
-      cpu: "10m"
+      cpu: "1m"
     limits:
       memory: "128Mi"
       cpu: "100m"
 
 authService:
   enabled: true
-  replicas: 1
+  replicas: 2
   image: cogni-auth-service
   imageTag: "dev-ce330c0"
   resources:
     requests:
       memory: "64Mi"
-      cpu: "10m"
+      cpu: "1m"
     limits:
       memory: "128Mi"
       cpu: "100m"
 
 vendorService:
   enabled: true
-  replicas: 1
+  replicas: 2
   image: cogni-vendor-service
   imageTag: "dev-5d20134"
   resources:
     requests:
       memory: "64Mi"
-      cpu: "10m"
+      cpu: "1m"
     limits:
       memory: "128Mi"
       cpu: "100m"
 
 aiService:
   enabled: true
-  replicas: 1
+  replicas: 2
   image: cogni-ai-service
   imageTag: "dev-bc12530"
   resources:
     requests:
       memory: "64Mi"
-      cpu: "10m"
+      cpu: "1m"
     limits:
       memory: "128Mi"
       cpu: "100m"
 
 adminService:
   enabled: true
-  replicas: 1
+  replicas: 2
   image: cogni-admin-service
   imageTag: "dev-f6876f7"
   resources:
     requests:
       memory: "64Mi"
-      cpu: "10m"
+      cpu: "1m"
     limits:
       memory: "128Mi"
       cpu: "100m"
 
 dispatchService:
   enabled: true
-  replicas: 1
+  replicas: 2
   image: cogni-dispatch-service
   imageTag: "dev-faed8b6"
   resources:
     requests:
       memory: "64Mi"
-      cpu: "15m"
+      cpu: "1m"
     limits:
       memory: "256Mi"
       cpu: "250m"
 
 paymentService:
   enabled: true
-  replicas: 1
+  replicas: 2
   image: cogni-payment-service
   imageTag: "dev-c76fc7d"
   resources:
     requests:
       memory: "64Mi"
-      cpu: "10m"
+      cpu: "1m"
     limits:
       memory: "128Mi"
       cpu: "100m"
 
 frontend:
   enabled: true
-  replicas: 1
+  replicas: 2
   image: cogni-frontend
   imageTag: "dev-e6a2bce"
   nodePort: 30081
   resources:
     requests:
       memory: "64Mi"
-      cpu: "15m"
+      cpu: "1m"
     limits:
       memory: "256Mi"
       cpu: "250m"
