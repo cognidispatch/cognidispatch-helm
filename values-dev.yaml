@@ -61,7 +61,7 @@ adminService:
   enabled: true
   replicas: 1
   image: cogni-admin-service
-  imageTag: "dev-6d1427e"
+  imageTag: "dev-f6876f7"
   resources:
     requests:
       memory: "64Mi"
