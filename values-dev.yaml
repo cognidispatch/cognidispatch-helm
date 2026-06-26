@@ -6,10 +6,75 @@ global:
 
 nginx:
   enabled: true
-  replicas: 2
+  replicas: 1
   image: cogni-nginx
   imageTag: latest
   nodePort: 30501
+  resources:
+    requests:
+      memory: "16Mi"
+      cpu: "1m"
+    limits:
+      memory: "64Mi"
+      cpu: "50m"
+
+authService:
+  enabled: true
+  replicas: 1
+  image: cogni-auth-service
+  imageTag: "dev-ce330c0"
+  resources:
+    requests:
+      memory: "32Mi"
+      cpu: "1m"
+    limits:
+      memory: "64Mi"
+      cpu: "50m"
+
+vendorService:
+  enabled: true
+  replicas: 1
+  image: cogni-vendor-service
+  imageTag: "dev-5d20134"
+  resources:
+    requests:
+      memory: "32Mi"
+      cpu: "1m"
+    limits:
+      memory: "64Mi"
+      cpu: "50m"
+
+aiService:
+  enabled: true
+  replicas: 1
+  image: cogni-ai-service
+  imageTag: "dev-bc12530"
+  resources:
+    requests:
+      memory: "32Mi"
+      cpu: "1m"
+    limits:
+      memory: "64Mi"
+      cpu: "50m"
+
+adminService:
+  enabled: true
+  replicas: 1
+  image: cogni-admin-service
+  imageTag: "dev-f6876f7"
+  resources:
+    requests:
+      memory: "32Mi"
+      cpu: "1m"
+    limits:
+      memory: "64Mi"
+      cpu: "50m"
+
+dispatchService:
+  enabled: true
+  replicas: 1
+  image: cogni-dispatch-service
+  imageTag: "dev-faed8b6"
   resources:
     requests:
       memory: "32Mi"
@@ -18,83 +83,18 @@ nginx:
       memory: "128Mi"
       cpu: "100m"
 
-authService:
-  enabled: true
-  replicas: 2
-  image: cogni-auth-service
-  imageTag: "dev-ce330c0"
-  resources:
-    requests:
-      memory: "64Mi"
-      cpu: "1m"
-    limits:
-      memory: "128Mi"
-      cpu: "100m"
-
-vendorService:
-  enabled: true
-  replicas: 2
-  image: cogni-vendor-service
-  imageTag: "dev-5d20134"
-  resources:
-    requests:
-      memory: "64Mi"
-      cpu: "1m"
-    limits:
-      memory: "128Mi"
-      cpu: "100m"
-
-aiService:
-  enabled: true
-  replicas: 2
-  image: cogni-ai-service
-  imageTag: "dev-bc12530"
-  resources:
-    requests:
-      memory: "64Mi"
-      cpu: "1m"
-    limits:
-      memory: "128Mi"
-      cpu: "100m"
-
-adminService:
-  enabled: true
-  replicas: 2
-  image: cogni-admin-service
-  imageTag: "dev-f6876f7"
-  resources:
-    requests:
-      memory: "64Mi"
-      cpu: "1m"
-    limits:
-      memory: "128Mi"
-      cpu: "100m"
-
-dispatchService:
-  enabled: true
-  replicas: 2
-  image: cogni-dispatch-service
-  imageTag: "dev-faed8b6"
-  resources:
-    requests:
-      memory: "64Mi"
-      cpu: "1m"
-    limits:
-      memory: "256Mi"
-      cpu: "250m"
-
 paymentService:
   enabled: true
-  replicas: 2
+  replicas: 1
   image: cogni-payment-service
   imageTag: "dev-c76fc7d"
   resources:
     requests:
-      memory: "64Mi"
+      memory: "32Mi"
       cpu: "1m"
     limits:
-      memory: "128Mi"
-      cpu: "100m"
+      memory: "64Mi"
+      cpu: "50m"
 
 frontend:
   enabled: true
@@ -104,15 +104,15 @@ frontend:
   nodePort: 30081
   resources:
     requests:
-      memory: "64Mi"
-      cpu: "100m"
+      memory: "32Mi"
+      cpu: "10m"
     limits:
-      memory: "256Mi"
-      cpu: "500m"
+      memory: "128Mi"
+      cpu: "300m"
   autoscaling:
     enabled: true
     minReplicas: 1
-    maxReplicas: 3
+    maxReplicas: 2
     targetCPU: 70
 
 config:
