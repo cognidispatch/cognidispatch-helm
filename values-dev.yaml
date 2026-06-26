@@ -30,6 +30,11 @@ authService:
     limits:
       memory: "128Mi"
       cpu: "100m"
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPU: 50
 
 vendorService:
   enabled: true
@@ -105,10 +110,15 @@ frontend:
   resources:
     requests:
       memory: "64Mi"
-      cpu: "1m"
+      cpu: "800m"
     limits:
       memory: "256Mi"
-      cpu: "250m"
+      cpu: "1000m"
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPU: 50
 
 config:
   nodeEnv: development
