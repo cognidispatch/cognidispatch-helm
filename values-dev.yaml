@@ -105,15 +105,15 @@ frontend:
   resources:
     requests:
       memory: "64Mi"
-      cpu: "800m"
+      cpu: "100m"
     limits:
       memory: "256Mi"
-      cpu: "1000m"
+      cpu: "500m"
   autoscaling:
     enabled: true
     minReplicas: 2
     maxReplicas: 4
-    targetCPU: 50
+    targetCPU: 70
 
 config:
   nodeEnv: development
