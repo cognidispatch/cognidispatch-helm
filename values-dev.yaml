@@ -30,11 +30,6 @@ authService:
     limits:
       memory: "128Mi"
       cpu: "100m"
-  autoscaling:
-    enabled: false
-    minReplicas: 2
-    maxReplicas: 4
-    targetCPU: 50
 
 vendorService:
   enabled: true

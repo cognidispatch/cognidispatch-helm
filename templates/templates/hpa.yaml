@@ -1,48 +1,35 @@
-{{- range $serviceName, $serviceConfig := list 
-  (dict "name" "auth-service" "config" .Values.authService)
-  (dict "name" "vendor-service" "config" .Values.vendorService)
-  (dict "name" "ai-service" "config" .Values.aiService)
-  (dict "name" "admin-service" "config" .Values.adminService)
-  (dict "name" "dispatch-service" "config" .Values.dispatchService)
-  (dict "name" "payment-service" "config" .Values.paymentService)
-  (dict "name" "cogni-frontend" "config" .Values.frontend)
--}}
-{{- if $serviceConfig.config }}
-{{- if $serviceConfig.config.enabled }}
-{{- if $serviceConfig.config.autoscaling }}
-{{- if $serviceConfig.config.autoscaling.enabled }}
+{{- if .Values.frontend }}
+{{- if .Values.frontend.autoscaling }}
+{{- if .Values.frontend.autoscaling.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ $serviceConfig.name }}-hpa
-  namespace: {{ $.Release.Namespace }}
+  name: cogni-frontend-hpa
+  namespace: {{ .Release.Namespace }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ $serviceConfig.name }}
-  minReplicas: {{ $serviceConfig.config.autoscaling.minReplicas | default 2 }}
-  maxReplicas: {{ $serviceConfig.config.autoscaling.maxReplicas | default 10 }}
+    name: cogni-frontend
+  minReplicas: {{ .Values.frontend.autoscaling.minReplicas | default 2 }}
+  maxReplicas: {{ .Values.frontend.autoscaling.maxReplicas | default 4 }}
   metrics:
-  {{- if $serviceConfig.config.autoscaling.targetCPU }}
+  {{- if .Values.frontend.autoscaling.targetCPU }}
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: {{ $serviceConfig.config.autoscaling.targetCPU }}
+        averageUtilization: {{ .Values.frontend.autoscaling.targetCPU }}
   {{- end }}
-  {{- if $serviceConfig.config.autoscaling.targetMemory }}
+  {{- if .Values.frontend.autoscaling.targetMemory }}
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: {{ $serviceConfig.config.autoscaling.targetMemory }}
+        averageUtilization: {{ .Values.frontend.autoscaling.targetMemory }}
   {{- end }}
----
-{{- end }}
-{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
