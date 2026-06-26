@@ -128,7 +128,7 @@ config:
 keyvault:
   enabled: true
   name: "cognidispatch-kv"
-  tenantId: "0c0c1198-4f0b-4f85-8409-de831b00f9f7"
+  tenantId: "a0ec9269-78da-479e-ae0f-ef0e90d13941"
   clientId: "3b00a8e4-9d13-488f-8e8e-b4842ab87168"
   workloadIdentityEnabled: true
 
