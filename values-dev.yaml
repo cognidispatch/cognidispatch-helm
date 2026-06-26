@@ -98,7 +98,7 @@ paymentService:
 
 frontend:
   enabled: true
-  replicas: 2
+  replicas: 1
   image: cogni-frontend
   imageTag: "dev-e6a2bce"
   nodePort: 30081
@@ -111,8 +111,8 @@ frontend:
       cpu: "500m"
   autoscaling:
     enabled: true
-    minReplicas: 2
-    maxReplicas: 4
+    minReplicas: 1
+    maxReplicas: 3
     targetCPU: 70
 
 config:
