@@ -2,7 +2,7 @@ repoURL: "https://github.com/cognidispatch/cognidispatch-helm.git"
 destinationServer: "https://kubernetes.default.svc"
 
 dev:
-  enabled: false
+  enabled: true
   targetRevision: "production"
   namespace: "cogni-dev"
 
