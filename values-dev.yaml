@@ -119,6 +119,7 @@ config:
   nodeEnv: development
   mongodbUri: "mongodb://cosmos-db-placeholder-do-not-use"
   azureSpeechKey: "keyvault-managed"
+  azureSpeechEndpoint: "https://cogni-speech-93849.cognitiveservices.azure.com/"
   azureSpeechRegion: "eastus"
   azureOpenaiEndpoint: "https://cogni-openai-eastus2-7c785.openai.azure.com/"
   azureOpenaiKey: "keyvault-managed"

@@ -117,6 +117,7 @@ config:
   nodeEnv: production
   mongodbUri: "mongodb://cosmos-cognidispatch-db:<password>@cosmos-cognidispatch-db.mongo.cosmos.azure.com:10255/cognidispatch?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cosmos-cognidispatch-db@"
   azureSpeechKey: "keyvault-managed"
+  azureSpeechEndpoint: "https://cogni-speech-93849.cognitiveservices.azure.com/"
   azureSpeechRegion: "eastus"
   azureOpenaiEndpoint: "https://cogni-openai-eastus2-7c785.openai.azure.com/"
   azureOpenaiKey: "keyvault-managed"

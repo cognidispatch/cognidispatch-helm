@@ -8,6 +8,7 @@ metadata:
 data:
   MONGODB_URI: {{ .Values.config.mongodbUri | quote }}
   AZURE_SPEECH_KEY: {{ .Values.config.azureSpeechKey | quote }}
+  AZURE_SPEECH_ENDPOINT: {{ .Values.config.azureSpeechEndpoint | quote }}
   AZURE_SPEECH_REGION: {{ .Values.config.azureSpeechRegion | quote }}
   AZURE_OPENAI_ENDPOINT: {{ .Values.config.azureOpenaiEndpoint | quote }}
   AZURE_OPENAI_KEY: {{ .Values.config.azureOpenaiKey | quote }}
