@@ -74,7 +74,7 @@ dispatchService:
   enabled: true
   replicas: 1
   image: cogni-dispatch-service
-  imageTag: "dev-f920805"
+  imageTag: "dev-f69b772"
   resources:
     requests:
       memory: "32Mi"
